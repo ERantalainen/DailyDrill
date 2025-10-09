@@ -14,9 +14,10 @@ func show_message(text):
 	$Message.show()
 	$MessageTimer.start()
 
-func show_game_over(score:int):
+func show_game_over(score : int):
 	var str = "You scored " +str(score) + " points"
 	show_message(str)
+	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
 	
 func update_score(score):

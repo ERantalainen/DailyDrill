@@ -2,7 +2,8 @@ extends Control
 @onready var minigame_container = $GameLayer/GameContainer
 var total_score = 0
 var games = [
-	"res://ngame1/ngame_1.tscn"
+	"res://ngame1/ngame_1.tscn",
+	"res://ngame2/ngame_2.tscn"
 ]
 var current_game = 0
 
@@ -16,6 +17,7 @@ func _process(delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	$Menu.hide()
+	$Menu/Menu/MenuItems.hide()
 	minigame_container.show()
 	start_next_minigame()
 	
@@ -37,6 +39,7 @@ func _on_minigame_over(score: int):
 	total_score += score
 	$Menu/Menu/TotalScore.text = str(total_score)
 	$Menu.show()
+	$Menu/Menu/TotalScore.show()
 	await get_tree().create_timer(2.0).timeout
-	$Menu.hide()
+	$Menu/Menu/TotalScore.hide()
 	start_next_minigame()

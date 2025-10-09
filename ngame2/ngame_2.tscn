@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://duke7xwvhfnj1"]
+
+[ext_resource type="Script" uid="uid://c66k4kmtgsxx5" path="res://ngame2/ngame_2.gd" id="1_8xi5t"]
+[ext_resource type="PackedScene" uid="uid://omk4uxy8iyaw" path="res://ngame2/target.tscn" id="2_nsf8j"]
+[ext_resource type="Script" uid="uid://5rdgcqm6lq8j" path="res://ngame2/wheel.gd" id="3_lrwtv"]
+[ext_resource type="PackedScene" uid="uid://c757mwr4hnlda" path="res://ngame2/hud.tscn" id="4_puqyv"]
+[ext_resource type="Script" uid="uid://cig4adc1bvbu3" path="res://ngame2/target_color.gd" id="5_wf47j"]
+[ext_resource type="Texture2D" uid="uid://6j5g65o5o2d8" path="res://ngame2/art/indicator.png" id="5_xddci"]
+
+[node name="Main" type="Panel"]
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8xi5t")
+target_scene = ExtResource("2_nsf8j")
+
+[node name="Wheel" type="MeshInstance2D" parent="."]
+position = Vector2(400, 300)
+script = ExtResource("3_lrwtv")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource("4_puqyv")]
+
+[node name="TargetColor" type="MeshInstance2D" parent="."]
+script = ExtResource("5_wf47j")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+position = Vector2(408, 64)
+texture = ExtResource("5_xddci")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 496.0
+offset_right = 480.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 64
+text = "stop
+"
+
+[connection signal="end_score" from="Wheel" to="." method="_on_wheel_end_score"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$TargetTimer.stop()
-	$HUD.show_game_over()
+	$HUD.show_game_over(score)
 	await get_tree().create_timer(2.0).timeout
 	emit_signal("game_over_return", score)
 	queue_free()
