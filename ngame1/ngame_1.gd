@@ -1,10 +1,11 @@
 extends Node
 @export var target_scene: PackedScene
 var score
+signal game_over_return(score: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	new_game()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -13,11 +14,18 @@ func _process(delta: float) -> void:
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$TargetTimer.stop()
+	$HUD.show_game_over()
+	await get_tree().create_timer(2.0).timeout
+	emit_signal("game_over_return", score)
+	queue_free()
 
 func new_game():
 	score = 0
+	get_tree().call_group("targets", "queue_free")
 	$Player.start($StartPos.position)
 	$StartTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message("Avoid monsters to increase score.\nArrow keys to move.\nReady?")
 
 func _on_target_timer_timeout() -> void:
 	var tar = target_scene.instantiate()
@@ -33,6 +41,7 @@ func _on_target_timer_timeout() -> void:
 	
 func _on_score_timer_timeout() -> void:
 	score += 1
+	$HUD.update_score(score)
 
 func _on_start_timer_timeout() -> void:
 	$TargetTimer.start()
