@@ -2,6 +2,7 @@ extends Control
 @onready var minigame_container = $GameLayer/GameContainer
 var total_score = 0
 var games = [
+	"res://minigames/stairgame.tscn",
 	"res://ngame1/ngame_1.tscn"
 ]
 var current_game = 0
