@@ -1,0 +1,131 @@
+[gd_scene load_steps=17 format=3 uid="uid://ceqtrhoje64i4"]
+
+[ext_resource type="Script" uid="uid://dshawds8n53nv" path="res://minigames/player.gd" id="1_1mk4d"]
+[ext_resource type="Texture2D" uid="uid://twd18aln1tds" path="res://assets/_Run.png" id="1_y8ysx"]
+[ext_resource type="Texture2D" uid="uid://bokyt5pwqirvl" path="res://assets/side-view-aspirations-stairway-black-260nw-2375854269.webp" id="2_tmxvd"]
+
+[sub_resource type="Curve2D" id="Curve2D_ssj7v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 48, -16, 0, 0, 0, 0, 72, -32, 0, 0, 0, 0, 96, -48, 0, 0, 0, 0, 120, -64, 0, 0, 0, 0, 0, 16)
+}
+point_count = 8
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmxvd"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mk4d"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqacg"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssj7v"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(360, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qir2l"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(480, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjm6q"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dod1u"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(720, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7flrs"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(840, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyh70"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(960, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxn2n"]
+atlas = ExtResource("1_y8ysx")
+region = Rect2(1080, 0, 120, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mt3ln"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmxvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mk4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqacg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssj7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qir2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjm6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dod1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7flrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyh70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxn2n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tsl0w"]
+
+[node name="Stairgame" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_left = -224.0
+offset_top = -136.0
+offset_right = 214.0
+offset_bottom = 144.0
+texture = ExtResource("2_tmxvd")
+
+[node name="player" type="Area2D" parent="."]
+position = Vector2(150, 550)
+scale = Vector2(3.9999998, 3.9999998)
+script = ExtResource("1_1mk4d")
+
+[node name="Path2D" type="Path2D" parent="player"]
+curve = SubResource("Curve2D_ssj7v")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="player/Path2D"]
+position = Vector2(37.61311, -9.075409)
+rotation = -0.5880026
+scale = Vector2(0.6876898, 1.168539)
+progress = 45.199196
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/Path2D/PathFollow2D"]
+z_index = 2
+position = Vector2(-36.696964, -19.462517)
+rotation = 0.37388203
+scale = Vector2(1.1264149, 0.6993565)
+skew = 0.4737085
+sprite_frames = SubResource("SpriteFrames_mt3ln")
+frame_progress = 0.32490653
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-7.6293945e-06, -1.5258789e-05)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_tsl0w")
+
+[node name="cooldown" type="Timer" parent="player"]
