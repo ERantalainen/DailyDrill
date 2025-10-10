@@ -9,7 +9,7 @@ var games = [
 
 ]
 var current_game = 0
-var total_played = 0
+var total_played = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	minigame_container.hide()
@@ -37,6 +37,8 @@ func start_next_minigame():
 	minigame_instance.connect("game_over_return", Callable(self, "_on_minigame_over"))
 	current_game += 1
 	current_loop.total_played += 1
+	if (current_loop.total_played % games.size() == 0):
+		Engine.time_scale += 0.25
 
 func _on_minigame_over(score: int):
 	minigame_container.hide()
