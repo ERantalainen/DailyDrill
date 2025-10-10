@@ -39,6 +39,7 @@ func _process(_delta: float) -> void:
 		attack()
 	if ($Player/damagetimer.is_stopped()):
 		move()
+	$score.text = "SCORE: " + str(score)
 
 func move():
 	var input = Vector2.ZERO
@@ -54,6 +55,7 @@ func move():
 	if Input.is_action_pressed("press_s"):
 		input.y += 10
 	if input != $Player.position:
+		$Player/AnimatedSprite2D.play("run")
 		$Player.global_position = input
 
 func _on_mob_timer_timeout() -> void:

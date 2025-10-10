@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://d14i81duu25ta"]
+[gd_scene load_steps=66 format=4 uid="uid://d14i81duu25ta"]
 
 [ext_resource type="Script" uid="uid://3m8ghjhvg8si" path="res://minigames/swordgame.gd" id="1_8t8wg"]
 [ext_resource type="PackedScene" uid="uid://cbroerkshhwup" path="res://minigames/enemy.tscn" id="2_indei"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://btyf1u6jeo0hw" path="res://assets/RUN.png" id="11_uy4n4"]
 [ext_resource type="AudioStream" uid="uid://c22mhld3rh30j" path="res://assets/Sword Attack 2.ogg" id="12_ulopd"]
 [ext_resource type="AudioStream" uid="uid://bxropioadqq2n" path="res://minigames/Dirt Run 2.ogg" id="14_jk5ey"]
+[ext_resource type="FontFile" uid="uid://dc3kd26fwv5so" path="res://assets/PixelOperator8.ttf" id="15_xwdt7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jk5ey"]
 texture = ExtResource("2_kbv03")
@@ -2435,6 +2436,15 @@ parameters/looping = true
 [node name="mobtimer" type="Timer" parent="."]
 
 [node name="gametime" type="Timer" parent="."]
+
+[node name="score" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 93.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0.9222415, 1, 0.7677026, 1)
+theme_override_fonts/font = ExtResource("15_xwdt7")
+text = "SCORE: "
 
 [connection signal="body_entered" from="Player" to="." method="_on_player_body_entered"]
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
