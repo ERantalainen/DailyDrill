@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvxwknda8n8y5"]
+[gd_scene load_steps=7 format=3 uid="uid://cvxwknda8n8y5"]
 
 [ext_resource type="Script" uid="uid://36oy0fi4i7pb" path="res://ngame1/ngame_1.gd" id="1_5av3x"]
 [ext_resource type="PackedScene" uid="uid://b088lp3apqk4d" path="res://ngame1/player.tscn" id="1_xlsar"]
 [ext_resource type="PackedScene" uid="uid://bhm70d1bj17td" path="res://ngame1/target.tscn" id="2_gg8p4"]
 [ext_resource type="PackedScene" uid="uid://kge5kyem1rwr" path="res://ngame1/hud.tscn" id="4_gg8p4"]
+[ext_resource type="Texture2D" uid="uid://br8pflp0ex4aj" path="res://menu/bg.png" id="5_225mc"]
 
 [sub_resource type="Curve2D" id="Curve2D_225mc"]
 _data = {
@@ -11,23 +12,12 @@ _data = {
 }
 point_count = 6
 
-[node name="Main" type="Panel"]
-custom_minimum_size = Vector2(800, 600)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Main" type="Node2D"]
 script = ExtResource("1_5av3x")
 target_scene = ExtResource("2_gg8p4")
 
 [node name="Player" parent="." instance=ExtResource("1_xlsar")]
+top_level = true
 
 [node name="TargetTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -42,14 +32,21 @@ one_shot = true
 position = Vector2(240, 450)
 
 [node name="TargetPath" type="Path2D" parent="."]
-position = Vector2(4, -4.418605)
-scale = Vector2(0.6700337, 0.89534885)
+position = Vector2(8.94118, -4.2325583)
+scale = Vector2(0.9459299, 0.9418604)
 curve = SubResource("Curve2D_225mc")
 
 [node name="TargetSpawnLoc" type="PathFollow2D" parent="TargetPath"]
 rotation = -0.7853982
 
 [node name="HUD" parent="." instance=ExtResource("4_gg8p4")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 3758.0
+offset_bottom = 1838.0
+texture = ExtResource("5_225mc")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="TargetTimer" to="." method="_on_target_timer_timeout"]

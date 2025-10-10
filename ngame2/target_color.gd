@@ -1,7 +1,7 @@
 extends MeshInstance2D
 
 func generate_target(target_color):
-	var box_size = Vector2(50, 50)
+	var box_size = Vector2(100, 100)
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 

@@ -14,7 +14,12 @@ func _process(delta: float) -> void:
 func new_game():
 	score = 0
 	$Button.show()
-	$TargetColor.generate_target($Wheel.section_colors[$Wheel.target_color])
+	var target_color = randi() % $Wheel.num_sections
+	print("target is " +str(target_color))
+	print("Target color: ", $Wheel.section_colors[target_color])
+	$Wheel.target_color = target_color
+	$TargetColor.generate_target($Wheel.section_colors[target_color])
+	$Wheel.start_spin()
 
 func _on_wheel_end_score(received_score: int) -> void:
 	score = received_score

@@ -32,6 +32,8 @@ func generate_wheel():
 		var mesh = ArrayMesh.new()
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_data)
 		self.mesh = mesh
+	var viewport_size = get_viewport_rect().size
+	self.position = viewport_size / 2
 
 func _process(delta):
 	if is_spinning:
@@ -43,17 +45,34 @@ func _process(delta):
 		is_spinning = false
 	if (!is_spinning && is_stopping):
 		emit_signal("end_score", check_score())
+		
 
 func start_spin():
 	if is_spinning:
 		return
 	is_spinning = true
-	spin_speed = 0.1
+	spin_speed = 0.05
+
+func	 remap_index(index:int) ->int:
+	match index:
+		0: return 5
+		1: return 4
+		2: return 3
+		3: return 2
+		4: return 1
+		5: return 0
+		6: return 7
+		7: return 6
+	return index
+	
 
 func check_score() -> int:
-# Calculate which section the wheel stopped on
-	var normalized_angle = fmod(current_angle, TAU)
-	var section_index = int(normalized_angle / (TAU / num_sections))
+	#Godot 0 angle is at three o'clock, so adjusting by -pi/2 moves check to the top
+	var normalized_angle = fmod(current_angle - PI / 2, TAU)
+#	draw_line(Vector2.ZERO, Vector2(cos(normalized_angle), sin(normalized_angle)) * radius * 1.2, Color.YELLOW, 2.0)
+	var section_index = remap_index((int(normalized_angle / (TAU / num_sections)) + 2) %num_sections)
+#	var string = "Hit index "+str(section_index)+", target was "+str(target_color)
+#	print(string)
 	if section_index == target_color:
 		return 10
 	else:
@@ -61,6 +80,17 @@ func check_score() -> int:
 		return 10 - 3 * min(temp_score, num_sections - temp_score)
 
 func _ready() -> void:
-	target_color = randi() % num_sections
 	generate_wheel()
-	start_spin()
+	#for i in range(num_sections):
+		#var start_angle = i * TAU / num_sections
+		#var end_angle = (i + 1) * TAU / num_sections
+		#print("Section ", i, ": ", start_angle, " to ", end_angle)
+
+#func _draw():
+	#var normalized_angle = fmod(current_angle - PI/2, TAU)
+	#var debug_length = radius * 1.2
+	#draw_line(Vector2.ZERO, Vector2(cos(normalized_angle), sin(normalized_angle)) * debug_length, Color.WHITE, 2.0)
+	#for i in range(num_sections):
+		#var angle = (i + 2) * TAU / num_sections - PI/2  # Align with the top
+		#var color = section_colors[i]
+		#draw_circle(Vector2(cos(angle), sin(angle)) * radius * 0.7, 10, color)  # Draw a small circle for each color

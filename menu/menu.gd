@@ -1,5 +1,6 @@
 extends Control
 @onready var minigame_container = $GameLayer/GameContainer
+@onready var shader_material = $ColorRect.material
 var total_score = 0
 var games = [
 	"res://ngame1/ngame_1.tscn",
@@ -7,6 +8,11 @@ var games = [
 ]
 var current_game = 0
 
+func update_greyscale(score:int):
+	var max_score = 100.0  # Adjust this to your desired maximum
+	var greyscale = max(0.0, 0.9 - (float(total_score) / max_score))
+	shader_material.set_shader_parameter("greyscale_amount", greyscale)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	minigame_container.hide()

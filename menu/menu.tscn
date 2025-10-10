@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cssuf0rrxfv86"]
+[gd_scene load_steps=7 format=3 uid="uid://cssuf0rrxfv86"]
 
 [ext_resource type="Script" uid="uid://d1xf77unxn2j" path="res://menu/menu.gd" id="1_g18jx"]
+[ext_resource type="Script" uid="uid://cr8b5hua40lma" path="res://menu/color_rect.gd" id="2_6nwqt"]
 [ext_resource type="PackedScene" uid="uid://b5x31y7x65n4i" path="res://menu/UI.tscn" id="2_g18jx"]
+[ext_resource type="Shader" uid="uid://8rhr6ut5grdh" path="res://menu/menu.gdshader" id="2_pbjm4"]
+[ext_resource type="Texture2D" uid="uid://br8pflp0ex4aj" path="res://menu/bg.png" id="5_svuvw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbjm4"]
+shader = ExtResource("2_pbjm4")
+shader_parameter/greyscale_amount = 0.9
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -16,6 +23,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g18jx")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pbjm4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_6nwqt")
+
 [node name="Menu" parent="." instance=ExtResource("2_g18jx")]
 
 [node name="GameLayer" type="CanvasLayer" parent="."]
@@ -23,6 +41,14 @@ script = ExtResource("1_g18jx")
 [node name="GameContainer" type="PanelContainer" parent="GameLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -679.0
+offset_top = -124.0
+offset_right = 3087.0
+offset_bottom = 1722.0
+texture = ExtResource("5_svuvw")
 
 [connection signal="quit_game" from="Menu" to="." method="_on_quit_pressed"]
 [connection signal="start_game" from="Menu" to="." method="_on_start_pressed"]
