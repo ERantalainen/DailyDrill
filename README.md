@@ -1,4 +1,4 @@
-A short collection of looping minigames made during the Hive October gamejam 2025
+A short collection of looping minigames The Daily Grind, made during the Hive October gamejam 2025.
 
 Assets: 
   Adwit Rahman https://adwitr.itch.io/
