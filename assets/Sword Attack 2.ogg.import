@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c22mhld3rh30j"
+path="res://.godot/imported/Sword Attack 2.ogg-14aded23d683439a0c965d964ba17133.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sword Attack 2.ogg"
+dest_files=["res://.godot/imported/Sword Attack 2.ogg-14aded23d683439a0c965d964ba17133.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

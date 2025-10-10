@@ -54,7 +54,6 @@ func move():
 	if Input.is_action_pressed("press_s"):
 		input.y += 10
 	if input != $Player.position:
-		$Player/AnimatedSprite2D.play("run")
 		$Player.global_position = input
 
 func _on_mob_timer_timeout() -> void:
@@ -102,6 +101,7 @@ func _on_damage_tick() -> void:
 func attack():
 	if attacking or sword_cooldown.time_left > 0.0:
 		return
+	$Player/sword/swing.play()
 	$Player/damagetimer.start(1.25)
 	$Player/AnimatedSprite2D.play("attack")
 	attacking = true

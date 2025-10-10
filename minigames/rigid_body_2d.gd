@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 
 func hurt():
 	$AnimatedSprite2D.play("hurt")
+	$AudioStreamPlayer2D.play()
 	shader.shader = load("res://minigames/enemy.gdshader")
 	$AnimatedSprite2D.material = shader
 	linear_velocity = -linear_velocity * 2

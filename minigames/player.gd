@@ -18,9 +18,9 @@ func _ready() -> void:
 	$player/cooldown.timeout.connect(_on_timer_timeout)
 	screen_size = get_viewport_rect().size
 	$player/Path2D/PathFollow2D.progress_ratio = 0
-	var red = Color(0.413, 0.127, 0.625, 1.0)
+	var red = Color(1.0, 1.0, 1.0, 1.0)
 	$player/press_d.set("theme_override_colors/font_color", red)
-	$player/press_d.text = "get to the treasure!"
+	$player/press_d.text = "Get ready"
 	action_index = 	rng.randi_range(0, 3)
 	speed = 0.05
 	$player/cooldown.start(1.8)
@@ -56,6 +56,7 @@ func action(key):
 			if ($player/Path2D/PathFollow2D.progress_ratio > 0.3 && $player/Path2D/PathFollow2D.progress_ratio < 0.55):
 				$player/Path2D/PathFollow2D/AnimatedSprite2D.play("jump")
 				tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", 0.55, 1)
+				$AudioStreamPlayer2D.playing = true
 			else:
 				tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", $player/Path2D/PathFollow2D.progress_ratio + speed, 0.5)
 			$player/cooldown.start(1);
@@ -92,6 +93,7 @@ func _on_timer_timeout():
 
 func set_state():
 	var n = 0;
+	$AudioStreamPlayer2D.playing = false
 	action_index = rng.randi_range(0, 3)
 	while n < 4:
 		if (action_index == n):

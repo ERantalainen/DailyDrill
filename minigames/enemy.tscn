@@ -1,9 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://cbroerkshhwup"]
+[gd_scene load_steps=21 format=3 uid="uid://cbroerkshhwup"]
 
 [ext_resource type="Script" uid="uid://j6mofdomt3hg" path="res://minigames/rigid_body_2d.gd" id="1_b5et4"]
 [ext_resource type="Texture2D" uid="uid://bwv86wawc8m21" path="res://assets/Attack-Sheet.png" id="2_ck8qo"]
 [ext_resource type="Texture2D" uid="uid://yy41jufmkyxr" path="res://assets/Fly-Sheet.png" id="3_ho4ai"]
 [ext_resource type="Texture2D" uid="uid://g4557ki8xlba" path="res://assets/Hit-Sheet.png" id="4_dxii7"]
+[ext_resource type="AudioStream" uid="uid://dpo3lpg10lp3p" path="res://assets/Sword Impact Hit 3.ogg" id="5_ck8qo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5et4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cucr"]
 atlas = ExtResource("2_ck8qo")
@@ -119,6 +122,7 @@ height = 48.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
 z_index = 4
+material = SubResource("ShaderMaterial_b5et4")
 collision_layer = 2
 collision_mask = 5
 gravity_scale = 0.0
@@ -133,5 +137,9 @@ shape = SubResource("CapsuleShape2D_qck8j")
 debug_color = Color(0.47979236, 0.017780354, 0.16520956, 0.41960785)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ck8qo")
+volume_db = 3.08
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

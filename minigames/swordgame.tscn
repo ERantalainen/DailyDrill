@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://d14i81duu25ta"]
+[gd_scene load_steps=65 format=4 uid="uid://d14i81duu25ta"]
 
 [ext_resource type="Script" uid="uid://3m8ghjhvg8si" path="res://minigames/swordgame.gd" id="1_8t8wg"]
 [ext_resource type="PackedScene" uid="uid://cbroerkshhwup" path="res://minigames/enemy.tscn" id="2_indei"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bnh68pdhnqiuu" path="res://assets/HURT.png" id="9_knkrt"]
 [ext_resource type="Texture2D" uid="uid://4dncnvkmv0si" path="res://assets/greenbar (2).png" id="11_aw20b"]
 [ext_resource type="Texture2D" uid="uid://btyf1u6jeo0hw" path="res://assets/RUN.png" id="11_uy4n4"]
+[ext_resource type="AudioStream" uid="uid://c22mhld3rh30j" path="res://assets/Sword Attack 2.ogg" id="12_ulopd"]
+[ext_resource type="AudioStream" uid="uid://bxropioadqq2n" path="res://minigames/Dirt Run 2.ogg" id="14_jk5ey"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jk5ey"]
 texture = ExtResource("2_kbv03")
@@ -2411,6 +2413,9 @@ shape = SubResource("CircleShape2D_aw20b")
 
 [node name="cooldown" type="Timer" parent="Player/sword"]
 
+[node name="swing" type="AudioStreamPlayer2D" parent="Player/sword"]
+stream = ExtResource("12_ulopd")
+
 [node name="health" type="TextureProgressBar" parent="Player"]
 offset_left = -64.0
 offset_top = -112.0
@@ -2419,6 +2424,13 @@ offset_bottom = 33.0
 max_value = 5.0
 value = 5.0
 texture_progress = ExtResource("11_aw20b")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("14_jk5ey")
+pitch_scale = 0.75
+autoplay = true
+panning_strength = 1.37
+parameters/looping = true
 
 [node name="mobtimer" type="Timer" parent="."]
 
