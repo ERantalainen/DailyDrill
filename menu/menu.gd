@@ -9,7 +9,7 @@ var games = [
 
 ]
 var current_game = 0
-var total_played = 3
+var total_played = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	minigame_container.hide()
