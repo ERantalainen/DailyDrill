@@ -51,7 +51,7 @@ func start_spin():
 	if is_spinning:
 		return
 	is_spinning = true
-	spin_speed = 0.05
+	spin_speed = 0.1
 
 func	 remap_index(index:int) ->int:
 	match index:
