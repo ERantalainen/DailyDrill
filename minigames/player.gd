@@ -10,25 +10,23 @@ var	action_index = 1
 var	score = 0
 var	speed;
 var checkpoint = 0.1
-signal game_over_return(score: int)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rng.seed = hash("Wario")
 	$cooldown.timeout.connect(_on_timer_timeout)
 	screen_size = get_viewport_rect().size
-	$press_d.show()
 	$Path2D/PathFollow2D.progress_ratio = 0
-	$press_a.hide()
-	var red = Color(0.8,0.0,0.0,1.0)
-	$press_a.set("theme_override_colors/font_color", red)
+	var red = Color(0.413, 0.127, 0.625, 1.0)
 	$press_d.set("theme_override_colors/font_color", red)
-	$cooldown.start(3)
+	$press_d.hide()
 	action_index = 	rng.randi_range(0, 3)
-	set_state()
-	speed = 0.05
+	speed = 0.05 * (current_loop.total_played + 1)
 	$gametime.start(30 - speed * 100)
 	$gametime.timeout.connect(gameover)
+	$cooldown.start(2)
+	$boar.play("default")
 	
 func gameover():
 	score = $Path2D/PathFollow2D.progress_ratio * 10

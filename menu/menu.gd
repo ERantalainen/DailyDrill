@@ -2,11 +2,13 @@ extends Control
 @onready var minigame_container = $GameLayer/GameContainer
 var total_score = 0
 var games = [
-	"res://minigames/stairgame.tscn",
-	"res://ngame1/ngame_1.tscn"
+	"res://minigames/swordgame.tscn",
+	"res://ngame1/ngame_1.tscn",
+	"res://minigames/stairgame.tscn"
+
 ]
 var current_game = 0
-
+var total_played = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	minigame_container.hide()
@@ -32,6 +34,7 @@ func start_next_minigame():
 	minigame_container.show()
 	minigame_instance.connect("game_over_return", Callable(self, "_on_minigame_over"))
 	current_game += 1
+	current_loop.total_played += 1
 
 func _on_minigame_over(score: int):
 	minigame_container.hide()
