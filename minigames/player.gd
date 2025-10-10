@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 var actions = [false, false, false, false]
 var action_id = ["press_a", "press_w", "press_s", "press_d"]
@@ -10,62 +10,66 @@ var	action_index = 1
 var	score = 0
 var	speed;
 var checkpoint = 0.1
-
+signal game_over_return(score: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rng.seed = hash("Wario")
-	$cooldown.timeout.connect(_on_timer_timeout)
+	$player/cooldown.timeout.connect(_on_timer_timeout)
 	screen_size = get_viewport_rect().size
-	$Path2D/PathFollow2D.progress_ratio = 0
+	$player/Path2D/PathFollow2D.progress_ratio = 0
 	var red = Color(0.413, 0.127, 0.625, 1.0)
-	$press_d.set("theme_override_colors/font_color", red)
-	$press_d.hide()
+	$player/press_d.set("theme_override_colors/font_color", red)
+	$player/press_d.text = "get to the treasure!"
 	action_index = 	rng.randi_range(0, 3)
-	speed = 0.05 * (current_loop.total_played + 1)
-	$gametime.start(30 - speed * 100)
-	$gametime.timeout.connect(gameover)
-	$cooldown.start(2)
-	$boar.play("default")
+	speed = 0.05
+	$player/cooldown.start(1.8)
+	$player/cooldown.one_shot = true
+	await(get_tree().create_timer(2.0).timeout)
+	$player/press_d.hide()
+	$player/gametime.start(30)
+	$player/gametime.timeout.connect(gameover)
+	$player/boar.play("default")
 	
 func gameover():
-	score = $Path2D/PathFollow2D.progress_ratio * 10
+	score = $player/Path2D/PathFollow2D.progress_ratio * 10
 	emit_signal("game_over_return", score)
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if ($Path2D/PathFollow2D.progress_ratio == 1):
+	if ($player/Path2D/PathFollow2D.progress_ratio == 1):
 		gameover()
 	if (actions[action_index] == true):
-		$press_d.text = action_name[action_index]
-		$press_d.show()
+		$player/press_d.text = action_name[action_index]
+		$player/press_d.show()
 		action(action_index)
 
 func action(key):
 	if Input.is_action_pressed(action_id[key]):
 		if (actions[key] == true):
 			actions[key] = false
-			$Path2D/PathFollow2D/AnimatedSprite2D.play("run")
+			$player/Path2D/PathFollow2D/AnimatedSprite2D.play("run")
 			last = key;
-			$press_d.hide()
+			$player/press_d.hide()
 			var tween = get_tree().create_tween()
-			if ($Path2D/PathFollow2D.progress_ratio > 0.3 && $Path2D/PathFollow2D.progress_ratio < 0.55):
-				$Path2D/PathFollow2D/AnimatedSprite2D.play("jump")
-				tween.tween_property($Path2D/PathFollow2D, "progress_ratio", 0.55, 1)
+			if ($player/Path2D/PathFollow2D.progress_ratio > 0.3 && $player/Path2D/PathFollow2D.progress_ratio < 0.55):
+				$player/Path2D/PathFollow2D/AnimatedSprite2D.play("jump")
+				tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", 0.55, 1)
 			else:
-				tween.tween_property($Path2D/PathFollow2D, "progress_ratio", $Path2D/PathFollow2D.progress_ratio + speed, 0.5)
-			$cooldown.start(1);
-		elif ($Path2D/PathFollow2D.progress_ratio > checkpoint):
-			$Path2D/PathFollow2D.progress_ratio -= 0.1
+				tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", $player/Path2D/PathFollow2D.progress_ratio + speed, 0.5)
+			$player/cooldown.start(1);
+		elif ($player/Path2D/PathFollow2D.progress_ratio > checkpoint):
+			$player/cooldown.start(1);
+			$player/Path2D/PathFollow2D.progress_ratio -= 0.05
 	elif Input.is_anything_pressed():
 		var tween = get_tree().create_tween()
-		if ($Path2D/PathFollow2D.progress_ratio > checkpoint):
-			$Path2D/PathFollow2D.progress_ratio -= 0.2
-			tween.tween_property($Path2D/PathFollow2D, "progress_ratio", $Path2D/PathFollow2D.progress_ratio - speed * 4, 0.5)
-		else:
-			tween.tween_property($Path2D/PathFollow2D, "progress_ratio", 0, 0.5)
+		tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", $player/Path2D/PathFollow2D.progress_ratio - speed * 4, 0.5)
 		actions[key] = false
+		$player/Path2D/PathFollow2D/AnimatedSprite2D.play("fall")
+		$player/press_d.hide()
+		$player/cooldown.start(1);
+		return
 
 
 func _on_timer_timeout():
@@ -73,17 +77,17 @@ func _on_timer_timeout():
 	if (actions[last] == false):
 		while (n < 4):
 			if (actions[n] != false):
-				if ($Path2D/PathFollow2D.progress_ratio > checkpoint):
+				if ($player/Path2D/PathFollow2D.progress_ratio > checkpoint):
 					var tween = get_tree().create_tween()
-					$Path2D/PathFollow2D/AnimatedSprite2D.play("fall")
-					tween.tween_property($Path2D/PathFollow2D, "progress_ratio", $Path2D/PathFollow2D.progress_ratio - speed * 2, 0.5)
+					$player/Path2D/PathFollow2D/AnimatedSprite2D.play("fall")
+					tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", $player/Path2D/PathFollow2D.progress_ratio - speed, 0.5)
 			n += 1
 	else:
 		actions[last] = false
-		if ($Path2D/PathFollow2D.progress_ratio > checkpoint):
+		if ($player/Path2D/PathFollow2D.progress_ratio > checkpoint):
 			var tween = get_tree().create_tween()
-			$Path2D/PathFollow2D/AnimatedSprite2D.play("fall")
-			tween.tween_property($Path2D/PathFollow2D, "progress_ratio", $Path2D/PathFollow2D.progress_ratio - speed * 2, 0.5)
+			$player/Path2D/PathFollow2D/AnimatedSprite2D.play("fall")
+			tween.tween_property($player/Path2D/PathFollow2D, "progress_ratio", $player/Path2D/PathFollow2D.progress_ratio - speed, 0.5)
 	set_state()
 
 func set_state():

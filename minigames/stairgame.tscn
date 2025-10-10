@@ -1674,6 +1674,7 @@ texture = ExtResource("6_hjm6q")
 sources/0 = SubResource("TileSetAtlasSource_tsl0w")
 
 [node name="Stairgame" type="Node2D"]
+script = ExtResource("1_1mk4d")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -1.0
@@ -1685,7 +1686,6 @@ texture = ExtResource("1_oqacg")
 [node name="player" type="Area2D" parent="."]
 position = Vector2(150, 550)
 scale = Vector2(3.9999998, 3.9999998)
-script = ExtResource("1_1mk4d")
 
 [node name="Path2D" type="Path2D" parent="player"]
 curve = SubResource("Curve2D_ssj7v")
