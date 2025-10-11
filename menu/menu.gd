@@ -5,8 +5,8 @@ var games = [
 	"res://minigames/swordgame.tscn",
 	"res://ngame1/ngame_1.tscn",
 	"res://ngame2/ngame_2.tscn",
-	"res://minigames/stairgame.tscn"
-
+	"res://minigames/stairgame.tscn",
+	"res://shoot/ShootieGame.tscn"
 ]
 var current_game = 0
 var total_played = 0
@@ -30,6 +30,7 @@ func _on_quit_pressed() -> void:
 func start_next_minigame():
 	if current_game >= games.size():
 		current_game = 0
+	$Label.hide()
 	var minigame_scene = load(games[current_game])
 	var minigame_instance = minigame_scene.instantiate()
 	minigame_container.add_child(minigame_instance)
@@ -43,9 +44,15 @@ func start_next_minigame():
 func _on_minigame_over(score: int):
 	minigame_container.hide()
 	total_score += score
+	var max = 3 * current_loop.total_played % 4
+	if (max > 10):
+		max = 10
 	$Menu/Menu/TotalScore.text = str(total_score)
 	$Menu.show()
 	$Menu/Menu/TotalScore.show()
 	await get_tree().create_timer(2.0).timeout
-	$Menu/Menu/TotalScore.hide()
-	start_next_minigame()
+	if (score  > max):
+		start_next_minigame()
+	else:
+		$Menu/Menu/MenuItems.show()
+		$Label.show()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbroerkshhwup"]
+[gd_scene load_steps=21 format=3 uid="uid://0d8t5f6owirc"]
 
-[ext_resource type="Script" uid="uid://j6mofdomt3hg" path="res://minigames/rigid_body_2d.gd" id="1_b5et4"]
+[ext_resource type="Script" uid="uid://bdylwwou3y5ht" path="res://minigames/enemy.gd" id="1_ck8qo"]
 [ext_resource type="Texture2D" uid="uid://bwv86wawc8m21" path="res://assets/Attack-Sheet.png" id="2_ck8qo"]
 [ext_resource type="Texture2D" uid="uid://yy41jufmkyxr" path="res://assets/Fly-Sheet.png" id="3_ho4ai"]
 [ext_resource type="Texture2D" uid="uid://g4557ki8xlba" path="res://assets/Hit-Sheet.png" id="4_dxii7"]
@@ -126,11 +126,11 @@ material = SubResource("ShaderMaterial_b5et4")
 collision_layer = 2
 collision_mask = 5
 gravity_scale = 0.0
-script = ExtResource("1_b5et4")
+script = ExtResource("1_ck8qo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ofpb")
-animation = &"fly"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qck8j")

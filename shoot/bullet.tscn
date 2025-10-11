@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfblvc0ruyc6q"]
+
+[ext_resource type="Texture2D" uid="uid://bsjyeikmsglav" path="res://shoot/assets/Arrow2.png" id="1_4dmwe"]
+[ext_resource type="Script" uid="uid://clcxlom17khty" path="res://shoot/bullet.gd" id="1_db137"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_db137"]
+size = Vector2(103, 37)
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.98
+gravity_scale = 0.0
+script = ExtResource("1_db137")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.752, 0.8)
+texture = ExtResource("1_4dmwe")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_db137")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

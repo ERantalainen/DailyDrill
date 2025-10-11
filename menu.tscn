@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cssuf0rrxfv86"]
+[gd_scene load_steps=6 format=3 uid="uid://cssuf0rrxfv86"]
 
 [ext_resource type="Script" uid="uid://d1xf77unxn2j" path="res://menu/menu.gd" id="1_g18jx"]
-[ext_resource type="PackedScene" path="res://menu/UI.tscn" id="2_g18jx"]
+[ext_resource type="PackedScene" uid="uid://b5x31y7x65n4i" path="res://menu/UI.tscn" id="2_g18jx"]
 [ext_resource type="AudioStream" uid="uid://42s1en63usnu" path="res://menu/JDSherbert - Minigame Music Pack - Streetlights.ogg" id="4_pbjm4"]
 [ext_resource type="Texture2D" uid="uid://br8pflp0ex4aj" path="res://menu/bg.png" id="5_svuvw"]
+[ext_resource type="FontFile" uid="uid://dc3kd26fwv5so" path="res://assets/PixelOperator8.ttf" id="5_ytr4m"]
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -36,8 +37,21 @@ texture = ExtResource("5_svuvw")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pbjm4")
+volume_db = -17.597
 autoplay = true
 parameters/looping = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 335.0
+offset_top = 478.0
+offset_right = 695.0
+offset_bottom = 522.0
+theme_override_colors/font_color = Color(0.017732391, 0.017732391, 0.01773239, 1)
+theme_override_fonts/font = ExtResource("5_ytr4m")
+theme_override_font_sizes/font_size = 43
+text = "GAME OVER!"
 
 [connection signal="quit_game" from="Menu" to="." method="_on_quit_pressed"]
 [connection signal="start_game" from="Menu" to="." method="_on_start_pressed"]

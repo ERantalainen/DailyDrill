@@ -14,7 +14,7 @@ signal game_over_return(score: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	rng.seed = hash("Wario")
+	rng.randomize()
 	$player/cooldown.timeout.connect(_on_timer_timeout)
 	screen_size = get_viewport_rect().size
 	$player/Path2D/PathFollow2D.progress_ratio = 0
@@ -26,6 +26,7 @@ func _ready() -> void:
 	$player/cooldown.start(1.8)
 	$player/cooldown.one_shot = true
 	await(get_tree().create_timer(2.0).timeout)
+	$Label.hide()
 	$player/press_d.hide()
 	$player/gametime.start(30)
 	$player/gametime.timeout.connect(gameover)

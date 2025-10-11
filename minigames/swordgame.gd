@@ -27,7 +27,9 @@ func _ready() -> void:
 	sword_cooldown.one_shot = true
 	$Player/AnimatedSprite2D.play("idle")
 	mob_timer.timeout.connect(_on_mob_timer_timeout)
+	await(get_tree().create_timer(2).timeout)
 	mob_timer.start(1.0)
+	$instructions.hide()
 	$Player/health.value = 5
 	$Player/damagetimer.one_shot = true
 	$gametime.start(30)
@@ -94,6 +96,7 @@ func _on_damage_tick() -> void:
 		$Player/health.value -= 1
 		$Player/AnimatedSprite2D.play("hurt")
 		if health <= 0:
+			score -= 3
 			gameover()
 			return
 		player_dmg_timer.start(hurt_interval)
