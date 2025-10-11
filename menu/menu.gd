@@ -37,21 +37,22 @@ func start_next_minigame():
 	minigame_container.show()
 	minigame_instance.connect("game_over_return", Callable(self, "_on_minigame_over"))
 	current_game += 1
-	current_loop.total_played += 1
-	if (current_loop.total_played % games.size() == 0):
+	total_played += 1
+	if (total_played % games.size() == 0):
 		Engine.time_scale += 0.25
 
 func _on_minigame_over(score: int):
 	minigame_container.hide()
+	score += score * ((total_played / games.size()) * 1.5)
 	total_score += score
-	var max = 3 * current_loop.total_played % 4
-	if (max > 10):
-		max = 10
+	var maxi:int = 3 * total_played / games.size()
+	if (maxi > (10 + (5 * ((total_played / (games.size() + 2)) * 1.5)))):
+		maxi = (10 + (5 * ((total_played / (games.size() + 2)) * 1.5)))
 	$Menu/Menu/TotalScore.text = str(total_score)
 	$Menu.show()
 	$Menu/Menu/TotalScore.show()
 	await get_tree().create_timer(2.0).timeout
-	if (score  > max):
+	if (score  > maxi):
 		start_next_minigame()
 	else:
 		$Menu/Menu/MenuItems.show()

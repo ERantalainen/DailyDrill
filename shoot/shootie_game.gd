@@ -73,7 +73,7 @@ func _on_mob_timer_timeout() -> void:
 	dir.normalized()
 	mob.linear_velocity = dir
 	add_child(mob)
-	$mob_timer.start(1.5)
+	$mob_timer.start(2.25)
 
 func _on_bow_animation_finished() -> void:
 	$bow.frame = 0
