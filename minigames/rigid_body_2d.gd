@@ -13,7 +13,7 @@ signal escaped(penalty: int)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
-	var weight = PackedFloat32Array([0.2, 1, 0.8, 1])
+	var weight = PackedFloat32Array([0.4, 1, 0.75, 1.5])
 	var enemy = enemies[rng.rand_weighted(weight)]
 	enemy_name = enemy
 	$AnimatedSprite2D.play(enemy)

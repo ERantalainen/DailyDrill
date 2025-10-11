@@ -73,7 +73,7 @@ func _on_mob_timer_timeout() -> void:
 	dir.normalized()
 	mob.linear_velocity = dir
 	add_child(mob)
-	$mob_timer.start(2.25)
+	$mob_timer.start(1.85)
 
 func _on_bow_animation_finished() -> void:
 	$bow.frame = 0
@@ -85,6 +85,7 @@ func _on_bow_animation_finished() -> void:
 
 func gameover():
 	emit_signal("game_over_return", score)
+	Input.set_custom_mouse_cursor(null)
 	queue_free()
 
 func _on_enemy_died(add):

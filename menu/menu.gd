@@ -9,9 +9,10 @@ var games = [
 	"res://shoot/ShootieGame.tscn"
 ]
 var current_game = 0
-var total_played = 0
+var total_played
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	total_played = 0
 	minigame_container.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,3 +58,5 @@ func _on_minigame_over(score: int):
 	else:
 		$Menu/Menu/MenuItems.show()
 		$Label.show()
+		total_played = 0
+		current_game = games.size()
