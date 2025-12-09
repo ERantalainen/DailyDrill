@@ -18,3 +18,15 @@ Music:
 <img width="1157" height="650" alt="kuva" src="https://github.com/user-attachments/assets/7d491ed4-4006-4484-82a4-f1b7d3fb2a3e" />
 
 <img width="1151" height="649" alt="kuva" src="https://github.com/user-attachments/assets/a9ddb46d-d1f5-49dd-a83e-011f94966b1b" />
+
+My part:
+
+- Samurai Bee Mini-game
+
+- Press the correct key mini-game
+
+- Archer run mini-game
+
+- Scoring & ramp up difficulty
+
+- Visual enhancements, and SFX
