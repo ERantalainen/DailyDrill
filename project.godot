@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 
 current_loop="*res://current_loop.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

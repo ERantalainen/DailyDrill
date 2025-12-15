@@ -12,6 +12,8 @@ var current_game = 0
 var total_played
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if (OS.get_name() == "HTML5"):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	total_played = 0
 	minigame_container.hide()
 
