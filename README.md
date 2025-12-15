@@ -6,23 +6,23 @@ You can try the game here: https://erantalainen.github.io/DailyDrill/
 
 ## MiniGames
 
-# Samurai (ERantalainen)
+### Samurai (ERantalainen)
 
 - A samurai fights against hordes of bees swatting them away, don't get hit!
 
-# Squids (patsastus)
+### Squids (patsastus)
 
 - Avoid the other squids to stay alive
 
-# Colorwheel (patsastus)
+### Colorwheel (patsastus)
 
 - Test your reaction time and land the wheel on the right color
 
-# Knight (ERantalainen)
+### Knight (ERantalainen)
 
 - Good soldiers follow orders, can you keep up and hit the right keys at the right time
 
-# Archer (ERantalainen)
+### Archer (ERantalainen)
 
 - Defend against hordes of enemies running your way, be careful not to hit civilians
 
@@ -38,7 +38,7 @@ SFX:
 Music: 
   JDSherbert  https://jdsherbert.itch.io/
 
-## PREVIEW
+### PREVIEW
 <img width="1147" height="644" alt="kuva" src="https://github.com/user-attachments/assets/3f8a4887-ce49-44b7-8527-5cc18ed466a6" />
 
 <img width="1150" height="649" alt="kuva" src="https://github.com/user-attachments/assets/2b22d995-1284-4810-a3de-11fa582d0682" />
