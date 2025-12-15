@@ -1,4 +1,30 @@
-A short collection of looping minigames with ever increasing difficulty 'The Daily Grind', made during the Hive October gamejam 2025.
+# Daily Grind
+
+A short collection of looping minigames with ever increasing difficulty 'The Daily Grind', made during the Hive October gamejam 2025. 
+
+You can try thee game here: https://erantalainen.github.io/DailyDrill/
+
+## MiniGames
+
+# Samurai (ERantalainen)
+
+- A samurai fights against hordes of bees swatting them away, don't get hit!
+
+# Squids (patsastus)
+
+- Avoid the other squids to stay alive
+
+# Colorwheel (patsastus)
+
+- Test your reaction time and land the wheel on the right color
+
+# Knight (ERantalainen)
+
+- Good soldiers follow orders, can you keep up and hit the right keys at the right time
+
+# Archer (ERantalainen)
+
+- Defend against hordes of enemies running your way, be careful not to hit civilians
 
 Assets: 
   Adwit Rahman https://adwitr.itch.io/
@@ -18,15 +44,3 @@ Music:
 <img width="1157" height="650" alt="kuva" src="https://github.com/user-attachments/assets/7d491ed4-4006-4484-82a4-f1b7d3fb2a3e" />
 
 <img width="1151" height="649" alt="kuva" src="https://github.com/user-attachments/assets/a9ddb46d-d1f5-49dd-a83e-011f94966b1b" />
-
-My part:
-
-- Samurai Bee Mini-game
-
-- Press the correct key mini-game
-
-- Archer run mini-game
-
-- Scoring & ramp up difficulty
-
-- Visual enhancements, and SFX
